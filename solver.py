@@ -28,19 +28,26 @@ def ds_dt(t: float, s: tuple) -> list[float]:
     ]
 
 
-def solve(s0: tuple, t0: float, tf: float, n: int) -> tuple:
-    """ Solve differential equation for given initial conditions, on given time span """
+def solve(s0: tuple, t0: float, tf: float, n: int) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """
+    Solve differential equation for given initial conditions, on given time span
+    :param s0: Initial vector
+    :param t0: Initial time
+    :param tf: Final time
+    :param n: Precision
+    :returns: Evolution of the double pendulum
+    """
     print('Solving...')
-    t: np.ndarray[float] = np.linspace(t0, tf, n)
+    t: np.ndarray = np.linspace(t0, tf, n)
     sol: Any = solve_ivp(fun=ds_dt, t_span=(t0, tf), y0=s0, method="DOP853", t_eval=t, rtol=1e-13, atol=1e-13)
 
     th1: list[float] = sol.y[0]
     th2: list[float] = sol.y[2]
 
-    x1: np.ndarray[float] = l1 * np.sin(th1)
-    y1: np.ndarray[float] = - l1 * np.cos(th1)
-    x2: np.ndarray[float] = x1 + l2 * np.sin(th2)
-    y2: np.ndarray[float] = y1 - l2 * np.cos(th2)
+    x1: np.ndarray = l1 * np.sin(th1)
+    y1: np.ndarray = - l1 * np.cos(th1)
+    x2: np.ndarray = x1 + l2 * np.sin(th2)
+    y2: np.ndarray = y1 - l2 * np.cos(th2)
     print('Ended solving')
 
     return x1, y1, x2, y2
