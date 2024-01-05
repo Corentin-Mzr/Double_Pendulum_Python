@@ -11,6 +11,8 @@ $$\ddot{\theta}_1 = -\frac{g}{l_1} \sin(\theta_1) -
 $$\ddot{\theta}_2 = -\frac{g}{l_2} \sin(\theta_2) + 
 \frac{m_1}{m_1 + m_2} \left(\frac{l_1}{l_2}\right) \ddot{\theta}_1 \sin(\theta_1 - \theta_2)$$
 
+We do not consider friction.
+
 ### Contents
 This project is divided in four files:
 - Parameters.py contains the parameters of the simulation, 
